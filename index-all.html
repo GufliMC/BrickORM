@@ -49,12 +49,12 @@ loadScripts(document, 'script');</script>
 <div class="header">
 <h1>Index</h1>
 </div>
-<a href="#I:A">A</a>&nbsp;<a href="#I:C">C</a>&nbsp;<a href="#I:D">D</a>&nbsp;<a href="#I:E">E</a>&nbsp;<a href="#I:F">F</a>&nbsp;<a href="#I:H">H</a>&nbsp;<a href="#I:M">M</a>&nbsp;<a href="#I:P">P</a>&nbsp;<a href="#I:Q">Q</a>&nbsp;<a href="#I:R">R</a>&nbsp;<a href="#I:S">S</a>&nbsp;<a href="#I:U">U</a>&nbsp;<br><a href="allclasses-index.html">All&nbsp;Classes&nbsp;and&nbsp;Interfaces</a><span class="vertical-separator">|</span><a href="allpackages-index.html">All&nbsp;Packages</a>
+<a href="#I:A">A</a>&nbsp;<a href="#I:C">C</a>&nbsp;<a href="#I:D">D</a>&nbsp;<a href="#I:E">E</a>&nbsp;<a href="#I:F">F</a>&nbsp;<a href="#I:H">H</a>&nbsp;<a href="#I:M">M</a>&nbsp;<a href="#I:P">P</a>&nbsp;<a href="#I:Q">Q</a>&nbsp;<a href="#I:R">R</a>&nbsp;<a href="#I:T">T</a>&nbsp;<a href="#I:U">U</a>&nbsp;<br><a href="allclasses-index.html">All&nbsp;Classes&nbsp;and&nbsp;Interfaces</a><span class="vertical-separator">|</span><a href="allpackages-index.html">All&nbsp;Packages</a>
 <h2 class="title" id="I:A">A</h2>
 <dl class="index">
-<dt><a href="com/guflimc/brick/orm/database/HibernateDatabaseContext.html#async(java.util.function.Consumer)" class="member-name-link">async(Consumer&lt;Session&gt;)</a> - Method in class com.guflimc.brick.orm.database.<a href="com/guflimc/brick/orm/database/HibernateDatabaseContext.html" title="class in com.guflimc.brick.orm.database">HibernateDatabaseContext</a></dt>
+<dt><a href="com/guflimc/brick/orm/database/HibernateDatabaseContext.html#async(java.util.function.Function)" class="member-name-link">async(Function&lt;EntityManager, T&gt;)</a> - Method in class com.guflimc.brick.orm.database.<a href="com/guflimc/brick/orm/database/HibernateDatabaseContext.html" title="class in com.guflimc.brick.orm.database">HibernateDatabaseContext</a></dt>
 <dd>
-<div class="block">Helper method to execute async statements on a new session.</div>
+<div class="block">Helper method to execute async operations on a new session.</div>
 </dd>
 </dl>
 <h2 class="title" id="I:C">C</h2>
@@ -118,7 +118,7 @@ loadScripts(document, 'script');</script>
 </dl>
 <h2 class="title" id="I:M">M</h2>
 <dl class="index">
-<dt><a href="com/guflimc/brick/orm/database/HibernateDatabaseContext.html#mergeAsync(java.lang.Object)" class="member-name-link">mergeAsync(Object)</a> - Method in class com.guflimc.brick.orm.database.<a href="com/guflimc/brick/orm/database/HibernateDatabaseContext.html" title="class in com.guflimc.brick.orm.database">HibernateDatabaseContext</a></dt>
+<dt><a href="com/guflimc/brick/orm/database/HibernateDatabaseContext.html#mergeAsync(T)" class="member-name-link">mergeAsync(T)</a> - Method in class com.guflimc.brick.orm.database.<a href="com/guflimc/brick/orm/database/HibernateDatabaseContext.html" title="class in com.guflimc.brick.orm.database">HibernateDatabaseContext</a></dt>
 <dd>
 <div class="block">Helper method to update an entity in the database async.</div>
 </dd>
@@ -134,19 +134,11 @@ loadScripts(document, 'script');</script>
 </dl>
 <h2 class="title" id="I:Q">Q</h2>
 <dl class="index">
-<dt><a href="com/guflimc/brick/orm/database/HibernateDatabaseContext.html#queryBuilder(java.util.function.BiConsumer)" class="member-name-link">queryBuilder(BiConsumer&lt;Session, CriteriaBuilder&gt;)</a> - Method in class com.guflimc.brick.orm.database.<a href="com/guflimc/brick/orm/database/HibernateDatabaseContext.html" title="class in com.guflimc.brick.orm.database">HibernateDatabaseContext</a></dt>
-<dd>
-<div class="block">Helper method to build and execute a query for a new session.</div>
-</dd>
-<dt><a href="com/guflimc/brick/orm/database/HibernateDatabaseContext.html#queryBuilder(java.util.function.BiFunction)" class="member-name-link">queryBuilder(BiFunction&lt;Session, CriteriaBuilder, T&gt;)</a> - Method in class com.guflimc.brick.orm.database.<a href="com/guflimc/brick/orm/database/HibernateDatabaseContext.html" title="class in com.guflimc.brick.orm.database">HibernateDatabaseContext</a></dt>
-<dd>
-<div class="block">Helper method to build and execute a query for a new session.</div>
-</dd>
-<dt><a href="com/guflimc/brick/orm/database/HibernateDatabaseContext.html#queryBuilderAsync(java.util.function.BiConsumer)" class="member-name-link">queryBuilderAsync(BiConsumer&lt;Session, CriteriaBuilder&gt;)</a> - Method in class com.guflimc.brick.orm.database.<a href="com/guflimc/brick/orm/database/HibernateDatabaseContext.html" title="class in com.guflimc.brick.orm.database">HibernateDatabaseContext</a></dt>
+<dt><a href="com/guflimc/brick/orm/database/HibernateDatabaseContext.html#queryBuilderAsync(java.util.function.BiConsumer)" class="member-name-link">queryBuilderAsync(BiConsumer&lt;EntityManager, CriteriaBuilder&gt;)</a> - Method in class com.guflimc.brick.orm.database.<a href="com/guflimc/brick/orm/database/HibernateDatabaseContext.html" title="class in com.guflimc.brick.orm.database">HibernateDatabaseContext</a></dt>
 <dd>
 <div class="block">Helper method to build and execute a query for a new session async.</div>
 </dd>
-<dt><a href="com/guflimc/brick/orm/database/HibernateDatabaseContext.html#queryBuilderAsync(java.util.function.BiFunction)" class="member-name-link">queryBuilderAsync(BiFunction&lt;Session, CriteriaBuilder, T&gt;)</a> - Method in class com.guflimc.brick.orm.database.<a href="com/guflimc/brick/orm/database/HibernateDatabaseContext.html" title="class in com.guflimc.brick.orm.database">HibernateDatabaseContext</a></dt>
+<dt><a href="com/guflimc/brick/orm/database/HibernateDatabaseContext.html#queryBuilderAsync(java.util.function.BiFunction)" class="member-name-link">queryBuilderAsync(BiFunction&lt;EntityManager, CriteriaBuilder, T&gt;)</a> - Method in class com.guflimc.brick.orm.database.<a href="com/guflimc/brick/orm/database/HibernateDatabaseContext.html" title="class in com.guflimc.brick.orm.database">HibernateDatabaseContext</a></dt>
 <dd>
 <div class="block">Helper method to build and execute a query for a new session async.</div>
 </dd>
@@ -158,11 +150,11 @@ loadScripts(document, 'script');</script>
 <div class="block">Helper method to delete an entity from the database async.</div>
 </dd>
 </dl>
-<h2 class="title" id="I:S">S</h2>
+<h2 class="title" id="I:T">T</h2>
 <dl class="index">
-<dt><a href="com/guflimc/brick/orm/database/HibernateDatabaseContext.html#sessionFactory()" class="member-name-link">sessionFactory()</a> - Method in class com.guflimc.brick.orm.database.<a href="com/guflimc/brick/orm/database/HibernateDatabaseContext.html" title="class in com.guflimc.brick.orm.database">HibernateDatabaseContext</a></dt>
+<dt><a href="com/guflimc/brick/orm/database/HibernateDatabaseContext.html#transactionAsync(java.util.function.Consumer)" class="member-name-link">transactionAsync(Consumer&lt;EntityManager&gt;)</a> - Method in class com.guflimc.brick.orm.database.<a href="com/guflimc/brick/orm/database/HibernateDatabaseContext.html" title="class in com.guflimc.brick.orm.database">HibernateDatabaseContext</a></dt>
 <dd>
-<div class="block">Retrieve the session factory for this database context.</div>
+<div class="block">Helper method to execute an async transaction.</div>
 </dd>
 </dl>
 <h2 class="title" id="I:U">U</h2>
@@ -170,7 +162,7 @@ loadScripts(document, 'script');</script>
 <dt><a href="com/guflimc/brick/orm/database/HibernateConfig.html#username" class="member-name-link">username</a> - Variable in class com.guflimc.brick.orm.database.<a href="com/guflimc/brick/orm/database/HibernateConfig.html" title="class in com.guflimc.brick.orm.database">HibernateConfig</a></dt>
 <dd>&nbsp;</dd>
 </dl>
-<a href="#I:A">A</a>&nbsp;<a href="#I:C">C</a>&nbsp;<a href="#I:D">D</a>&nbsp;<a href="#I:E">E</a>&nbsp;<a href="#I:F">F</a>&nbsp;<a href="#I:H">H</a>&nbsp;<a href="#I:M">M</a>&nbsp;<a href="#I:P">P</a>&nbsp;<a href="#I:Q">Q</a>&nbsp;<a href="#I:R">R</a>&nbsp;<a href="#I:S">S</a>&nbsp;<a href="#I:U">U</a>&nbsp;<br><a href="allclasses-index.html">All&nbsp;Classes&nbsp;and&nbsp;Interfaces</a><span class="vertical-separator">|</span><a href="allpackages-index.html">All&nbsp;Packages</a></main>
+<a href="#I:A">A</a>&nbsp;<a href="#I:C">C</a>&nbsp;<a href="#I:D">D</a>&nbsp;<a href="#I:E">E</a>&nbsp;<a href="#I:F">F</a>&nbsp;<a href="#I:H">H</a>&nbsp;<a href="#I:M">M</a>&nbsp;<a href="#I:P">P</a>&nbsp;<a href="#I:Q">Q</a>&nbsp;<a href="#I:R">R</a>&nbsp;<a href="#I:T">T</a>&nbsp;<a href="#I:U">U</a>&nbsp;<br><a href="allclasses-index.html">All&nbsp;Classes&nbsp;and&nbsp;Interfaces</a><span class="vertical-separator">|</span><a href="allpackages-index.html">All&nbsp;Packages</a></main>
 </div>
 </div>
 </body>
