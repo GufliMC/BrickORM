@@ -1,0 +1,27 @@
+plugins {
+    id 'com.github.johnrengelman.shadow' version '7.1.2' apply false
+    id 'pl.allegro.tech.build.axion-release' version '1.13.6'
+}
+
+group 'com.guflimc.brick.orm'
+version = scmVersion.version
+
+def javadocProjects = [project(':common')]
+ext.set("javadocProjects", javadocProjects)
+
+def publishProjects = [project(':common')]
+ext.set("publishProjects", publishProjects)
+
+subprojects {
+    apply plugin: 'java'
+    apply plugin: 'java-library'
+
+    repositories {
+        maven { url 'https://repo.spongepowered.org/maven' }
+        maven { url "https://repo.jorisg.com/snapshots" }
+    }
+}
+
+apply from: 'https://guflimc.github.io/scripts/gradle/subprojects-default.gradle'
+apply from: 'https://guflimc.github.io/scripts/gradle/subprojects-javadoc.gradle'
+apply from: 'https://guflimc.github.io/scripts/gradle/subprojects-publish.gradle'

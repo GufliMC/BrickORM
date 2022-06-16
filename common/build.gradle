@@ -1,0 +1,8 @@
+
+
+dependencies {
+    api 'org.hibernate:hibernate-core:+'
+
+    api 'net.kyori:adventure-api:4.+'
+    implementation 'net.kyori:adventure-text-serializer-gson:+'
+}
