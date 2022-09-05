@@ -4,6 +4,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -107,7 +108,12 @@ public abstract class HibernateDatabaseContext {
      * @return a future that will be completed with the list of entities
      */
     public final <T> CompletableFuture<List<T>> findAllAsync(Class<T> entityType) {
-        return findAllAsync(entityType, Function.identity());
+        return findAllAsync(entityType, (cb, root, cq) -> cq);
+    }
+
+    @FunctionalInterface
+    public interface FindAllModifier<T> {
+        CriteriaQuery<T> modify(CriteriaBuilder builder, Root<T> root, CriteriaQuery<T> query);
     }
 
     /**
@@ -117,16 +123,42 @@ public abstract class HibernateDatabaseContext {
      * @param modifier   function that will modify the query
      * @return a future that will be completed with the list of entities
      */
-    public final <T> CompletableFuture<List<T>> findAllAsync(Class<T> entityType, Function<CriteriaQuery<T>, CriteriaQuery<T>> modifier) {
+    public final <T> CompletableFuture<List<T>> findAllAsync(Class<T> entityType, FindAllModifier<T> modifier) {
         return queryBuilderAsync((em, cb) -> {
             CriteriaQuery<T> query = cb.createQuery(entityType);
             Root<T> root = query.from(entityType);
-            query = modifier.apply(query);
+            query = modifier.modify(cb, root, query);
             query = query.select(root);
 
             TypedQuery<T> typedQuery = em.createQuery(query);
             return typedQuery.getResultList();
         });
+    }
+
+    /**
+     * Helper method to find all entities of a given entity class async with a where clause.
+     *
+     * @param entityType entity class
+     * @param modifier   function that create the where clause
+     * @return a future that will be completed with the list of entities
+     */
+    public final <T> CompletableFuture<List<T>> findAllWhereAsync(Class<T> entityType, BiFunction<CriteriaBuilder, Root<T>, Predicate> modifier) {
+        return findAllAsync(entityType, (cb, root, cq) -> {
+            cq = cq.where(modifier.apply(cb, root));
+            return cq;
+        });
+    }
+
+    /**
+     * Helper method to find all entities of a given entity class async with a single where condition.
+     *
+     * @param entityType entity class
+     * @param field      name of the entity field
+     * @param value      value of the field
+     * @return a future that will be completed with the list of entities
+     */
+    public final <T> CompletableFuture<List<T>> findAllWhereAsync(Class<T> entityType, String field, Object value) {
+        return findAllWhereAsync(entityType, (cb, root) -> cb.equal(root.get(field), value));
     }
 
     /**
