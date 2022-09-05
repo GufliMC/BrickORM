@@ -43,7 +43,7 @@ loadScripts(document, 'script');</script>
 <div>
 <ul class="sub-nav-list">
 <li>Summary:&nbsp;</li>
-<li>Nested&nbsp;|&nbsp;</li>
+<li><a href="#nested-class-summary">Nested</a>&nbsp;|&nbsp;</li>
 <li>Field&nbsp;|&nbsp;</li>
 <li><a href="#constructor-summary">Constr</a>&nbsp;|&nbsp;</li>
 <li><a href="#method-summary">Method</a></li>
@@ -80,6 +80,21 @@ loadScripts(document, 'script');</script>
 </section>
 <section class="summary">
 <ul class="summary-list">
+<!-- ======== NESTED CLASS SUMMARY ======== -->
+<li>
+<section class="nested-class-summary" id="nested-class-summary">
+<h2>Nested Class Summary</h2>
+<div class="caption"><span>Nested Classes</span></div>
+<div class="summary-table three-column-summary">
+<div class="table-header col-first">Modifier and Type</div>
+<div class="table-header col-second">Class</div>
+<div class="table-header col-last">Description</div>
+<div class="col-first even-row-color"><code>static interface&nbsp;</code></div>
+<div class="col-second even-row-color"><code><a href="HibernateDatabaseContext.FindAllModifier.html" class="type-name-link" title="interface in com.guflimc.brick.orm.database">HibernateDatabaseContext.FindAllModifier</a>&lt;<a href="HibernateDatabaseContext.FindAllModifier.html" title="type parameter in HibernateDatabaseContext.FindAllModifier">T</a>&gt;</code></div>
+<div class="col-last even-row-color">&nbsp;</div>
+</div>
+</section>
+</li>
 <!-- ======== CONSTRUCTOR SUMMARY ======== -->
 <li>
 <section class="constructor-summary" id="constructor-summary">
@@ -123,10 +138,23 @@ loadScripts(document, 'script');</script>
 <div class="block">Helper method to find all entities of a given entity class async.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final &lt;T&gt;&nbsp;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/concurrent/CompletableFuture.html" title="class or interface in java.util.concurrent" class="external-link">CompletableFuture</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;T&gt;&gt;</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#findAllAsync(java.lang.Class,java.util.function.Function)" class="member-name-link">findAllAsync</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;T&gt;&nbsp;entityType,
- <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/Function.html" title="class or interface in java.util.function" class="external-link">Function</a>&lt;jakarta.persistence.criteria.CriteriaQuery&lt;T&gt;,<wbr>jakarta.persistence.criteria.CriteriaQuery&lt;T&gt;&gt;&nbsp;modifier)</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#findAllAsync(java.lang.Class,com.guflimc.brick.orm.database.HibernateDatabaseContext.FindAllModifier)" class="member-name-link">findAllAsync</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;T&gt;&nbsp;entityType,
+ <a href="HibernateDatabaseContext.FindAllModifier.html" title="interface in com.guflimc.brick.orm.database">HibernateDatabaseContext.FindAllModifier</a>&lt;T&gt;&nbsp;modifier)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Helper method to find all entities of a given entity class async with the ability to refine the selection.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final &lt;T&gt;&nbsp;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/concurrent/CompletableFuture.html" title="class or interface in java.util.concurrent" class="external-link">CompletableFuture</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;T&gt;&gt;</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#findAllWhereAsync(java.lang.Class,java.lang.String,java.lang.Object)" class="member-name-link">findAllWhereAsync</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;T&gt;&nbsp;entityType,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;field,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&nbsp;value)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Helper method to find all entities of a given entity class async with a single where condition.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final &lt;T&gt;&nbsp;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/concurrent/CompletableFuture.html" title="class or interface in java.util.concurrent" class="external-link">CompletableFuture</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;T&gt;&gt;</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#findAllWhereAsync(java.lang.Class,java.util.function.BiFunction)" class="member-name-link">findAllWhereAsync</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;T&gt;&nbsp;entityType,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/BiFunction.html" title="class or interface in java.util.function" class="external-link">BiFunction</a>&lt;jakarta.persistence.criteria.CriteriaBuilder,<wbr>jakarta.persistence.criteria.Root&lt;T&gt;,<wbr>jakarta.persistence.criteria.Predicate&gt;&nbsp;modifier)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Helper method to find all entities of a given entity class async with a where clause.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final &lt;T&gt;&nbsp;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/concurrent/CompletableFuture.html" title="class or interface in java.util.concurrent" class="external-link">CompletableFuture</a>&lt;T&gt;</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#findAsync(java.lang.Class,java.lang.Object)" class="member-name-link">findAsync</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;T&gt;&nbsp;entityType,
@@ -268,15 +296,47 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
-<section class="detail" id="findAllAsync(java.lang.Class,java.util.function.Function)">
+<section class="detail" id="findAllAsync(java.lang.Class,com.guflimc.brick.orm.database.HibernateDatabaseContext.FindAllModifier)">
 <h3>findAllAsync</h3>
 <div class="member-signature"><span class="modifiers">public final</span>&nbsp;<span class="type-parameters">&lt;T&gt;</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/concurrent/CompletableFuture.html" title="class or interface in java.util.concurrent" class="external-link">CompletableFuture</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;T&gt;&gt;</span>&nbsp;<span class="element-name">findAllAsync</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;T&gt;&nbsp;entityType,
- <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/Function.html" title="class or interface in java.util.function" class="external-link">Function</a>&lt;jakarta.persistence.criteria.CriteriaQuery&lt;T&gt;,<wbr>jakarta.persistence.criteria.CriteriaQuery&lt;T&gt;&gt;&nbsp;modifier)</span></div>
+ <a href="HibernateDatabaseContext.FindAllModifier.html" title="interface in com.guflimc.brick.orm.database">HibernateDatabaseContext.FindAllModifier</a>&lt;T&gt;&nbsp;modifier)</span></div>
 <div class="block">Helper method to find all entities of a given entity class async with the ability to refine the selection.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>entityType</code> - entity class</dd>
 <dd><code>modifier</code> - function that will modify the query</dd>
+<dt>Returns:</dt>
+<dd>a future that will be completed with the list of entities</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="findAllWhereAsync(java.lang.Class,java.util.function.BiFunction)">
+<h3>findAllWhereAsync</h3>
+<div class="member-signature"><span class="modifiers">public final</span>&nbsp;<span class="type-parameters">&lt;T&gt;</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/concurrent/CompletableFuture.html" title="class or interface in java.util.concurrent" class="external-link">CompletableFuture</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;T&gt;&gt;</span>&nbsp;<span class="element-name">findAllWhereAsync</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;T&gt;&nbsp;entityType,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/BiFunction.html" title="class or interface in java.util.function" class="external-link">BiFunction</a>&lt;jakarta.persistence.criteria.CriteriaBuilder,<wbr>jakarta.persistence.criteria.Root&lt;T&gt;,<wbr>jakarta.persistence.criteria.Predicate&gt;&nbsp;modifier)</span></div>
+<div class="block">Helper method to find all entities of a given entity class async with a where clause.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>entityType</code> - entity class</dd>
+<dd><code>modifier</code> - function that create the where clause</dd>
+<dt>Returns:</dt>
+<dd>a future that will be completed with the list of entities</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="findAllWhereAsync(java.lang.Class,java.lang.String,java.lang.Object)">
+<h3>findAllWhereAsync</h3>
+<div class="member-signature"><span class="modifiers">public final</span>&nbsp;<span class="type-parameters">&lt;T&gt;</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/concurrent/CompletableFuture.html" title="class or interface in java.util.concurrent" class="external-link">CompletableFuture</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;T&gt;&gt;</span>&nbsp;<span class="element-name">findAllWhereAsync</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;T&gt;&nbsp;entityType,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;field,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&nbsp;value)</span></div>
+<div class="block">Helper method to find all entities of a given entity class async with a single where condition.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>entityType</code> - entity class</dd>
+<dd><code>field</code> - name of the entity field</dd>
+<dd><code>value</code> - value of the field</dd>
 <dt>Returns:</dt>
 <dd>a future that will be completed with the list of entities</dd>
 </dl>

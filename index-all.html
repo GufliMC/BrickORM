@@ -94,9 +94,17 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Helper method to find all entities of a given entity class async.</div>
 </dd>
-<dt><a href="com/guflimc/brick/orm/database/HibernateDatabaseContext.html#findAllAsync(java.lang.Class,java.util.function.Function)" class="member-name-link">findAllAsync(Class&lt;T&gt;, Function&lt;CriteriaQuery&lt;T&gt;, CriteriaQuery&lt;T&gt;&gt;)</a> - Method in class com.guflimc.brick.orm.database.<a href="com/guflimc/brick/orm/database/HibernateDatabaseContext.html" title="class in com.guflimc.brick.orm.database">HibernateDatabaseContext</a></dt>
+<dt><a href="com/guflimc/brick/orm/database/HibernateDatabaseContext.html#findAllAsync(java.lang.Class,com.guflimc.brick.orm.database.HibernateDatabaseContext.FindAllModifier)" class="member-name-link">findAllAsync(Class&lt;T&gt;, HibernateDatabaseContext.FindAllModifier&lt;T&gt;)</a> - Method in class com.guflimc.brick.orm.database.<a href="com/guflimc/brick/orm/database/HibernateDatabaseContext.html" title="class in com.guflimc.brick.orm.database">HibernateDatabaseContext</a></dt>
 <dd>
 <div class="block">Helper method to find all entities of a given entity class async with the ability to refine the selection.</div>
+</dd>
+<dt><a href="com/guflimc/brick/orm/database/HibernateDatabaseContext.html#findAllWhereAsync(java.lang.Class,java.lang.String,java.lang.Object)" class="member-name-link">findAllWhereAsync(Class&lt;T&gt;, String, Object)</a> - Method in class com.guflimc.brick.orm.database.<a href="com/guflimc/brick/orm/database/HibernateDatabaseContext.html" title="class in com.guflimc.brick.orm.database">HibernateDatabaseContext</a></dt>
+<dd>
+<div class="block">Helper method to find all entities of a given entity class async with a single where condition.</div>
+</dd>
+<dt><a href="com/guflimc/brick/orm/database/HibernateDatabaseContext.html#findAllWhereAsync(java.lang.Class,java.util.function.BiFunction)" class="member-name-link">findAllWhereAsync(Class&lt;T&gt;, BiFunction&lt;CriteriaBuilder, Root&lt;T&gt;, Predicate&gt;)</a> - Method in class com.guflimc.brick.orm.database.<a href="com/guflimc/brick/orm/database/HibernateDatabaseContext.html" title="class in com.guflimc.brick.orm.database">HibernateDatabaseContext</a></dt>
+<dd>
+<div class="block">Helper method to find all entities of a given entity class async with a where clause.</div>
 </dd>
 <dt><a href="com/guflimc/brick/orm/database/HibernateDatabaseContext.html#findAsync(java.lang.Class,java.lang.Object)" class="member-name-link">findAsync(Class&lt;T&gt;, Object)</a> - Method in class com.guflimc.brick.orm.database.<a href="com/guflimc/brick/orm/database/HibernateDatabaseContext.html" title="class in com.guflimc.brick.orm.database">HibernateDatabaseContext</a></dt>
 <dd>
@@ -115,6 +123,8 @@ loadScripts(document, 'script');</script>
 <dd>&nbsp;</dd>
 <dt><a href="com/guflimc/brick/orm/database/HibernateDatabaseContext.html#%3Cinit%3E(com.guflimc.brick.orm.database.HibernateConfig,int)" class="member-name-link">HibernateDatabaseContext(HibernateConfig, int)</a> - Constructor for class com.guflimc.brick.orm.database.<a href="com/guflimc/brick/orm/database/HibernateDatabaseContext.html" title="class in com.guflimc.brick.orm.database">HibernateDatabaseContext</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="com/guflimc/brick/orm/database/HibernateDatabaseContext.FindAllModifier.html" class="type-name-link" title="interface in com.guflimc.brick.orm.database">HibernateDatabaseContext.FindAllModifier</a>&lt;<a href="com/guflimc/brick/orm/database/HibernateDatabaseContext.FindAllModifier.html" title="type parameter in HibernateDatabaseContext.FindAllModifier">T</a>&gt; - Interface in <a href="com/guflimc/brick/orm/database/package-summary.html">com.guflimc.brick.orm.database</a></dt>
+<dd>&nbsp;</dd>
 </dl>
 <h2 class="title" id="I:M">M</h2>
 <dl class="index">
@@ -122,6 +132,8 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Helper method to update an entity in the database async.</div>
 </dd>
+<dt><a href="com/guflimc/brick/orm/database/HibernateDatabaseContext.FindAllModifier.html#modify(jakarta.persistence.criteria.CriteriaBuilder,jakarta.persistence.criteria.Root,jakarta.persistence.criteria.CriteriaQuery)" class="member-name-link">modify(CriteriaBuilder, Root&lt;T&gt;, CriteriaQuery&lt;T&gt;)</a> - Method in interface com.guflimc.brick.orm.database.<a href="com/guflimc/brick/orm/database/HibernateDatabaseContext.FindAllModifier.html" title="interface in com.guflimc.brick.orm.database">HibernateDatabaseContext.FindAllModifier</a></dt>
+<dd>&nbsp;</dd>
 </dl>
 <h2 class="title" id="I:P">P</h2>
 <dl class="index">
