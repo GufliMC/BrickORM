@@ -8,6 +8,7 @@ import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.boot.model.naming.CamelCaseToUnderscoresNamingStrategy;
 import org.hibernate.cfg.Configuration;
 
 import java.util.Arrays;
@@ -38,12 +39,17 @@ public abstract class HibernateDatabaseContext {
             properties.setProperty("hibernate.connection.driver_class", config.driver);
         }
 
+        if ( config.debug ) {
+            properties.setProperty("hibernate.show_sql", "true");
+        }
+
         properties.setProperty("hibernate.connection.pool_size", poolSize + "");
         properties.setProperty("hibernate.hbm2ddl.auto", "update");
 //        properties.setProperty("hibernate.current_session_context_class", "thread");
 
         Configuration configuration = new Configuration();
         configuration.setProperties(properties);
+        configuration.setPhysicalNamingStrategy(new CamelCaseToUnderscoresNamingStrategy());
 
         // register classes
         Arrays.stream(entityClasses()).forEach(configuration::addAnnotatedClass);
