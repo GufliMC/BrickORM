@@ -26,7 +26,7 @@ public abstract class HibernateDatabaseContext {
     private final SessionFactory sessionFactory;
 
     public HibernateDatabaseContext(HibernateConfig config) {
-        this(config, 5);
+        this(config, 15);
     }
 
     public HibernateDatabaseContext(HibernateConfig config, int poolSize) {
@@ -39,7 +39,11 @@ public abstract class HibernateDatabaseContext {
             properties.setProperty("hibernate.connection.driver_class", config.driver);
         }
 
-        if ( config.debug ) {
+        if (config.dialect != null) {
+            properties.setProperty("hibernate.dialect", config.dialect);
+        }
+
+        if (config.debug) {
             properties.setProperty("hibernate.show_sql", "true");
         }
 
