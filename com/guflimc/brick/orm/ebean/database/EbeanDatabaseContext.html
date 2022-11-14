@@ -115,9 +115,9 @@ implements <a href="../../api/database/DatabaseContext.html" title="interface in
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>protected abstract <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;?&gt;[]</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#entityClasses()" class="member-name-link">entityClasses</a>()</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#applicableClasses()" class="member-name-link">applicableClasses</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">Must be overriden, used to specify all entity classes for this database context.</div>
+<div class="block">Must be overriden, used to specify all classes for this database context.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>&lt;T&gt;&nbsp;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/concurrent/CompletableFuture.html" title="class or interface in java.util.concurrent" class="external-link">CompletableFuture</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;T&gt;&gt;</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#findAllAsync(java.lang.Class)" class="member-name-link">findAllAsync</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;T&gt;&nbsp;entityType)</code></div>
@@ -210,13 +210,13 @@ implements <a href="../../api/database/DatabaseContext.html" title="interface in
 </section>
 </li>
 <li>
-<section class="detail" id="entityClasses()">
-<h3>entityClasses</h3>
-<div class="member-signature"><span class="modifiers">protected abstract</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;?&gt;[]</span>&nbsp;<span class="element-name">entityClasses</span>()</div>
-<div class="block">Must be overriden, used to specify all entity classes for this database context.</div>
+<section class="detail" id="applicableClasses()">
+<h3>applicableClasses</h3>
+<div class="member-signature"><span class="modifiers">protected abstract</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;?&gt;[]</span>&nbsp;<span class="element-name">applicableClasses</span>()</div>
+<div class="block">Must be overriden, used to specify all classes for this database context.</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>array of entity classes</dd>
+<dd>array of classes</dd>
 </dl>
 </section>
 </li>
