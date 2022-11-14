@@ -6,10 +6,10 @@ plugins {
 group 'com.guflimc.brick.orm'
 version = scmVersion.version
 
-def javadocProjects = [project(':common')]
+def javadocProjects = [project(':api'), project(':jpa'), project(':jpa-converters'), project(':ebean'), project(':hibernate')]
 ext.set("javadocProjects", javadocProjects)
 
-def publishProjects = [project(':common')]
+def publishProjects = [project(':api'), project(':jpa'), project(':jpa-converters'), project(':ebean'), project(':hibernate')]
 ext.set("publishProjects", publishProjects)
 
 subprojects {
@@ -17,7 +17,6 @@ subprojects {
     apply plugin: 'java-library'
 
     repositories {
-        maven { url 'https://repo.spongepowered.org/maven' }
         maven { url "https://repo.jorisg.com/snapshots" }
     }
 }

@@ -1,0 +1,11 @@
+
+repositories {
+    maven { url 'https://repo.spongepowered.org/maven' }
+}
+
+dependencies {
+    api project(':jpa')
+
+    api 'net.kyori:adventure-api:4.+'
+    implementation 'net.kyori:adventure-text-serializer-gson:+'
+}

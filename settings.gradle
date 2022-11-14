@@ -1,4 +1,9 @@
 rootProject.name = 'BrickORM'
 
-include 'common'
+include 'api'
+include 'jpa'
+include 'jpa-converters'
+
+include 'hibernate'
+include 'ebean'
 
