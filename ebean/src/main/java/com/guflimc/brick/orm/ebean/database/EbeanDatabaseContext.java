@@ -1,17 +1,17 @@
 package com.guflimc.brick.orm.ebean.database;
 
 import com.guflimc.brick.orm.api.database.DatabaseContext;
-import io.ebean.DB;
 import io.ebean.Database;
 import io.ebean.DatabaseFactory;
 import io.ebean.Transaction;
 import io.ebean.config.DatabaseConfig;
+import io.ebean.config.dbplatform.DatabasePlatform;
 import io.ebean.datasource.DataSourceConfig;
 import io.ebean.datasource.DataSourceFactory;
 import io.ebean.datasource.DataSourcePool;
 import io.ebean.migration.MigrationConfig;
 import io.ebean.migration.MigrationRunner;
-import io.ebean.typequery.TQRootBean;
+import io.ebean.platform.mysql.MySqlPlatform;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -36,6 +36,10 @@ public abstract class EbeanDatabaseContext implements DatabaseContext {
     public EbeanDatabaseContext(EbeanConfig config, String dataSourceName, int poolSize) {
         this.dataSourceName = dataSourceName;
 
+        // change context classloader
+        ClassLoader originalContextClassLoader = Thread.currentThread().getContextClassLoader();
+        Thread.currentThread().setContextClassLoader(this.getClass().getClassLoader());
+
         DataSourceConfig dataSourceConfig = new DataSourceConfig();
         dataSourceConfig.setUrl(config.dsn);
         dataSourceConfig.setUsername(config.username);
@@ -50,6 +54,9 @@ public abstract class EbeanDatabaseContext implements DatabaseContext {
 
         migrate(pool);
         database = connect(pool);
+
+        // set context class loader
+        Thread.currentThread().setContextClassLoader(originalContextClassLoader);
     }
 
     private void migrate(DataSourcePool pool) {
@@ -71,11 +78,12 @@ public abstract class EbeanDatabaseContext implements DatabaseContext {
         DatabaseConfig config = new DatabaseConfig();
         config.setDataSource(pool);
         config.setRegister(true);
+        config.setDatabasePlatform(new MySqlPlatform());
         config.setDefaultServer(false);
         config.setName(dataSourceName);
 
         // register classes
-        Arrays.stream(entityClasses()).forEach(config::addClass);
+        Arrays.stream(applicableClasses()).forEach(config::addClass);
 
         return DatabaseFactory.create(config);
     }
@@ -87,11 +95,11 @@ public abstract class EbeanDatabaseContext implements DatabaseContext {
     }
 
     /**
-     * Must be overriden, used to specify all entity classes for this database context.
+     * Must be overriden, used to specify all classes for this database context.
      *
-     * @return array of entity classes
+     * @return array of classes
      */
-    protected abstract Class<?>[] entityClasses();
+    protected abstract Class<?>[] applicableClasses();
 
     //
 

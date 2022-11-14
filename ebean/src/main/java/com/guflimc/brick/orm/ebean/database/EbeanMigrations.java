@@ -6,9 +6,13 @@ import io.ebean.annotation.Platform;
 import io.ebean.config.DatabaseConfig;
 import io.ebean.datasource.DataSourceConfig;
 import io.ebean.dbmigration.DbMigration;
+import io.ebean.migration.MigrationConfig;
+import io.ebean.migration.MigrationRunner;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,7 +30,7 @@ public class EbeanMigrations {
         this.dbMigration.setPathToResources(resourcePath.toString());
         this.dbMigration.setMigrationPath("dbmigrations");
 
-        for ( Platform platform : platforms ) {
+        for (Platform platform : platforms) {
             this.dbMigration.addPlatform(platform);
         }
     }
@@ -35,7 +39,7 @@ public class EbeanMigrations {
         classes.add(clazz);
     }
 
-    public void generate() throws IOException {
+    public void generate() throws IOException, SQLException {
         // create mock db with same name as used in the app
         DataSourceConfig dataSourceConfig = new DataSourceConfig();
         dataSourceConfig.setUrl("jdbc:h2:mem:migrationdb;");
@@ -48,10 +52,20 @@ public class EbeanMigrations {
         config.setName(dataSourceName);
         classes.forEach(config::addClass);
 
+        // create database
         Database database = DatabaseFactory.create(config);
         dbMigration.setServer(database);
 
+        // generate migrations
         dbMigration.generateMigration();
+
+        // run migrations to verify them on mock database
+        MigrationConfig migrationConfig = new MigrationConfig();
+        Connection conn = database.dataSource().getConnection();
+        migrationConfig.setMigrationPath("dbmigrations/h2");
+
+        MigrationRunner runner = new MigrationRunner(migrationConfig);
+        runner.run(conn);
     }
 
 }
