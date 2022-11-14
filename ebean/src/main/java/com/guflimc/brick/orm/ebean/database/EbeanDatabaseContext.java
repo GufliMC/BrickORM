@@ -2,6 +2,7 @@ package com.guflimc.brick.orm.ebean.database;
 
 import com.guflimc.brick.orm.api.database.DatabaseContext;
 import io.ebean.DB;
+import io.ebean.Database;
 import io.ebean.DatabaseFactory;
 import io.ebean.Transaction;
 import io.ebean.config.DatabaseConfig;
@@ -26,6 +27,8 @@ public abstract class EbeanDatabaseContext implements DatabaseContext {
     private final DataSourcePool pool;
     private final String dataSourceName;
 
+    private final Database database;
+
     public EbeanDatabaseContext(EbeanConfig config, String dataSourceName) {
         this(config, dataSourceName,15);
     }
@@ -46,7 +49,7 @@ public abstract class EbeanDatabaseContext implements DatabaseContext {
         pool.setMaxSize(poolSize);
 
         migrate(pool);
-        connect(pool);
+        database = connect(pool);
     }
 
     private void migrate(DataSourcePool pool) {
@@ -64,7 +67,7 @@ public abstract class EbeanDatabaseContext implements DatabaseContext {
         }
     }
 
-    private void connect(DataSourcePool pool) {
+    private Database connect(DataSourcePool pool) {
         DatabaseConfig config = new DatabaseConfig();
         config.setDataSource(pool);
         config.setRegister(true);
@@ -74,7 +77,7 @@ public abstract class EbeanDatabaseContext implements DatabaseContext {
         // register classes
         Arrays.stream(entityClasses()).forEach(config::addClass);
 
-        DatabaseFactory.create(config);
+        return DatabaseFactory.create(config);
     }
 
     public final void shutdown() {
@@ -111,7 +114,7 @@ public abstract class EbeanDatabaseContext implements DatabaseContext {
 
     public CompletableFuture<Void> transactionAsync(Consumer<Transaction> consumer) {
         return async(() -> {
-            try (Transaction transaction = DB.beginTransaction();) {
+            try (Transaction transaction = database.beginTransaction();) {
                 consumer.accept(transaction);
                 transaction.commit();
             }
@@ -122,12 +125,12 @@ public abstract class EbeanDatabaseContext implements DatabaseContext {
 
     @Override
     public final CompletableFuture<Void> persistAsync(Object... objects) {
-        return transactionAsync(t -> DB.saveAll(objects));
+        return transactionAsync(t -> database.saveAll(objects));
     }
 
     @Override
     public CompletableFuture<Void> persistAsync(Collection<Object> objects) {
-        return transactionAsync(t -> DB.saveAll(objects));
+        return transactionAsync(t -> database.saveAll(objects));
     }
 
     @Override
@@ -137,7 +140,7 @@ public abstract class EbeanDatabaseContext implements DatabaseContext {
 
     @Override
     public final CompletableFuture<Void> removeAsync(Collection<Object> objects) {
-        return transactionAsync(t -> DB.deleteAll(objects));
+        return transactionAsync(t -> database.deleteAll(objects));
     }
 
     //
@@ -145,16 +148,16 @@ public abstract class EbeanDatabaseContext implements DatabaseContext {
 
     @Override
     public <T> CompletableFuture<T> findAsync(Class<T> entityType, Object id) {
-        return async(() -> DB.createQuery(entityType).setId(id).findOne());
+        return async(() -> database.createQuery(entityType).setId(id).findOne());
     }
 
     @Override
     public <T> CompletableFuture<List<T>> findAllAsync(Class<T> entityType) {
-        return async(() -> DB.createQuery(entityType).findList());
+        return async(() -> database.createQuery(entityType).findList());
     }
 
     @Override
     public <T> CompletableFuture<List<T>> findAllWhereAsync(Class<T> entityType, String field, Object value) {
-        return async(() -> DB.createQuery(entityType).where().eq(field, value).findList());
+        return async(() -> database.createQuery(entityType).where().eq(field, value).findList());
     }
 }
