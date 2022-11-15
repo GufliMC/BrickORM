@@ -1,6 +1,5 @@
 com.guflimc.brick.orm.api.data
 com.guflimc.brick.orm.api.database
-com.guflimc.brick.orm.ebean.converters
 com.guflimc.brick.orm.ebean.database
 com.guflimc.brick.orm.hibernate.database
 com.guflimc.brick.orm.jpa.converters
