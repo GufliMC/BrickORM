@@ -1,3 +1,4 @@
+com.guflimc.brick.orm.api.attributes
 com.guflimc.brick.orm.api.data
 com.guflimc.brick.orm.api.database
 com.guflimc.brick.orm.ebean.database
