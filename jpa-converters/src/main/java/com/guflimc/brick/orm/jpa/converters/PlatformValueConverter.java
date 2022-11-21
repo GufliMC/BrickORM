@@ -5,7 +5,7 @@ import jakarta.persistence.AttributeConverter;
 import jakarta.persistence.Converter;
 
 @Converter
-public class PlatformValueConverter implements AttributeConverter<PlatformValue, String> {
+public class PlatformValueConverter implements AttributeConverter<PlatformValue, String>, javax.persistence.AttributeConverter<PlatformValue, String> {
 
     @Override
     public String convertToDatabaseColumn(PlatformValue attribute) {
