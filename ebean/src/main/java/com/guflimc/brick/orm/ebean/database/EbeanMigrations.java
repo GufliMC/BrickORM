@@ -40,6 +40,10 @@ public class EbeanMigrations {
     }
 
     public void generate() throws IOException, SQLException {
+        generate(false);
+    }
+
+    public void generate(boolean strictMode) throws IOException, SQLException {
         // create mock db with same name as used in the app
         DataSourceConfig dataSourceConfig = new DataSourceConfig();
         dataSourceConfig.setUrl("jdbc:h2:mem:migrationdb;");
@@ -55,6 +59,7 @@ public class EbeanMigrations {
         // create database
         Database database = DatabaseFactory.create(config);
         dbMigration.setServer(database);
+        dbMigration.setStrictMode(strictMode);
 
         // generate migrations
         dbMigration.generateMigration();
