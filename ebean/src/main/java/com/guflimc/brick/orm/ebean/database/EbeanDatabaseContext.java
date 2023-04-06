@@ -5,13 +5,11 @@ import io.ebean.Database;
 import io.ebean.DatabaseFactory;
 import io.ebean.Transaction;
 import io.ebean.config.DatabaseConfig;
-import io.ebean.config.dbplatform.DatabasePlatform;
 import io.ebean.datasource.DataSourceConfig;
 import io.ebean.datasource.DataSourceFactory;
 import io.ebean.datasource.DataSourcePool;
 import io.ebean.migration.MigrationConfig;
 import io.ebean.migration.MigrationRunner;
-import io.ebean.platform.mysql.MySqlPlatform;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -30,7 +28,7 @@ public abstract class EbeanDatabaseContext implements DatabaseContext {
     private final Database database;
 
     public EbeanDatabaseContext(EbeanConfig config, String dataSourceName) {
-        this(config, dataSourceName,15);
+        this(config, dataSourceName, 15);
     }
 
     public EbeanDatabaseContext(EbeanConfig config, String dataSourceName, int poolSize) {
@@ -78,7 +76,6 @@ public abstract class EbeanDatabaseContext implements DatabaseContext {
         DatabaseConfig config = new DatabaseConfig();
         config.setDataSource(pool);
         config.setRegister(true);
-        config.setDatabasePlatform(new MySqlPlatform());
         config.setDefaultServer(false);
         config.setName(dataSourceName);
 
