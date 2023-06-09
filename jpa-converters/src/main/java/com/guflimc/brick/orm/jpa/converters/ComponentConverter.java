@@ -9,7 +9,7 @@ import net.kyori.adventure.text.serializer.gson.GsonComponentSerializer;
  * JPA Converter for converting between a {@link Component} and a {@link String}.
  */
 @Converter
-public class ComponentConverter implements AttributeConverter<Component, String>, javax.persistence.AttributeConverter<Component, String> {
+public class ComponentConverter implements AttributeConverter<Component, String> {
 
     @Override
     public String convertToDatabaseColumn(Component attribute) {

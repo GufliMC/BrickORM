@@ -1,0 +1,2 @@
+io.ebean.platform.h2.H2PlatformProvider
+io.ebean.platform.mysql.MySqlPlatformProvider
