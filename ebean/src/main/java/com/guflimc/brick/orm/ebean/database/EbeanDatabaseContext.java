@@ -10,6 +10,8 @@ import io.ebean.datasource.DataSourceFactory;
 import io.ebean.datasource.DataSourcePool;
 import io.ebean.migration.MigrationConfig;
 import io.ebean.migration.MigrationRunner;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -164,5 +166,16 @@ public abstract class EbeanDatabaseContext implements DatabaseContext {
     @Override
     public <T> CompletableFuture<List<T>> findAllWhereAsync(Class<T> entityType, String field, Object value) {
         return async(() -> database.createQuery(entityType).where().eq(field, value).findList());
+    }
+
+    //
+
+    public CompletableFuture<Void> refreshAsync(Object bean) {
+        return async(() -> {
+            database.refresh(bean);
+            Arrays.stream(bean.getClass().getDeclaredFields())
+                    .filter(f -> f.isAnnotationPresent(OneToMany.class) || f.isAnnotationPresent(ManyToMany.class))
+                    .forEach(f -> database.refreshMany(bean, f.getName()));
+        });
     }
 }
