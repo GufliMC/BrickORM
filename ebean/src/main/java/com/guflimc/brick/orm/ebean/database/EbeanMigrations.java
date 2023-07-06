@@ -4,6 +4,8 @@ import io.ebean.Database;
 import io.ebean.DatabaseFactory;
 import io.ebean.annotation.Platform;
 import io.ebean.config.DatabaseConfig;
+import io.ebean.config.dbplatform.DatabasePlatform;
+import io.ebean.config.dbplatform.DatabasePlatformProvider;
 import io.ebean.datasource.DataSourceConfig;
 import io.ebean.dbmigration.DbMigration;
 import io.ebean.migration.MigrationConfig;
@@ -52,8 +54,10 @@ public class EbeanMigrations {
 
         // use same datasource name
         DatabaseConfig config = new DatabaseConfig();
+        config.setDatabasePlatform(new DatabasePlatform());
         config.setDataSourceConfig(dataSourceConfig);
         config.setName(dataSourceName);
+        config.setAllQuotedIdentifiers(true);
         classes.forEach(config::addClass);
 
         // create database

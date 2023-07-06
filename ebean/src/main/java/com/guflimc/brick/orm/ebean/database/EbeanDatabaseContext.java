@@ -13,6 +13,7 @@ import io.ebean.migration.MigrationRunner;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 
+import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Arrays;
@@ -24,7 +25,6 @@ import java.util.function.Supplier;
 
 public abstract class EbeanDatabaseContext implements DatabaseContext {
 
-    private final DataSourcePool pool;
     private final String dataSourceName;
 
     private final Database database;
@@ -40,6 +40,7 @@ public abstract class EbeanDatabaseContext implements DatabaseContext {
         ClassLoader originalContextClassLoader = Thread.currentThread().getContextClassLoader();
         Thread.currentThread().setContextClassLoader(this.getClass().getClassLoader());
 
+        // datasource config
         DataSourceConfig dataSourceConfig = new DataSourceConfig();
         dataSourceConfig.setUrl(config.dsn);
         dataSourceConfig.setUsername(config.username);
@@ -49,47 +50,49 @@ public abstract class EbeanDatabaseContext implements DatabaseContext {
             dataSourceConfig.setDriver(config.driver);
         }
 
-        pool = DataSourceFactory.create(dataSourceName, dataSourceConfig);
+        // initialize pool
+        DataSourcePool pool = DataSourceFactory.create(dataSourceName, dataSourceConfig);
         pool.setMaxSize(poolSize);
 
-        migrate(pool);
-        database = connect(pool);
+        // initialize database
+        DatabaseConfig databaseConfig = new DatabaseConfig();
+        databaseConfig.setAllQuotedIdentifiers(true);
+        databaseConfig.setDataSource(pool);
+        databaseConfig.setRegister(true);
+        databaseConfig.setDefaultServer(false);
+        databaseConfig.setName(dataSourceName);
+
+        // register classes
+        Arrays.stream(applicableClasses()).forEach(databaseConfig::addClass);
+
+        database = DatabaseFactory.create(databaseConfig);
+
+        // migrate
+        migrate();
 
         // set context class loader
         Thread.currentThread().setContextClassLoader(originalContextClassLoader);
     }
 
-    private void migrate(DataSourcePool pool) {
+    public final void shutdown() {
+        if (database != null) {
+            database.shutdown();
+        }
+    }
+
+    private void migrate() {
         MigrationConfig config = new MigrationConfig();
+        DataSource ds = database.dataSource();
 
         try {
-            Connection conn = pool.getConnection();
+            Connection conn = ds.getConnection();
             String platform = conn.getMetaData().getDatabaseProductName().toLowerCase();
             config.setMigrationPath("dbmigrations/" + platform);
 
             MigrationRunner runner = new MigrationRunner(config);
-            runner.run(conn);
+            runner.run(ds);
         } catch (SQLException e) {
             throw new RuntimeException(e);
-        }
-    }
-
-    private Database connect(DataSourcePool pool) {
-        DatabaseConfig config = new DatabaseConfig();
-        config.setDataSource(pool);
-        config.setRegister(true);
-        config.setDefaultServer(false);
-        config.setName(dataSourceName);
-
-        // register classes
-        Arrays.stream(applicableClasses()).forEach(config::addClass);
-
-        return DatabaseFactory.create(config);
-    }
-
-    public final void shutdown() {
-        if (pool != null) {
-            pool.shutdown();
         }
     }
 
