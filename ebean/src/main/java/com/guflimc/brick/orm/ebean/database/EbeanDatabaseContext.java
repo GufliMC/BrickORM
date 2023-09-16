@@ -57,6 +57,7 @@ public abstract class EbeanDatabaseContext implements DatabaseContext {
         // initialize database
         DatabaseConfig databaseConfig = new DatabaseConfig();
         databaseConfig.setAllQuotedIdentifiers(true);
+        databaseConfig.setDisableLazyLoading(true);
         databaseConfig.setDataSource(pool);
         databaseConfig.setRegister(true);
         databaseConfig.setDefaultServer(false);
