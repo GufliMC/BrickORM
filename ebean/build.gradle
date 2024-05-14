@@ -1,20 +1,18 @@
 plugins {
-    id 'io.ebean' version '15.+'
+    id 'io.ebean' version '14.+'
 }
-
-
 
 dependencies {
     api project(':api')
 
-    api 'io.ebean:ebean-api:15.3.0'
+    api 'io.ebean:ebean-api:14.3.0'
 
-    implementation 'io.ebean:ebean-core:15.3.0'
-    implementation 'io.ebean:ebean-ddl-generator:15.3.0'
+    implementation 'io.ebean:ebean-core:14.3.0'
     implementation 'io.ebean:ebean-datasource:8.14'
+    implementation 'io.ebean:ebean-ddl-generator:14.3.0'
 
-    runtimeOnly 'io.ebean:ebean-platform-h2:15.3.0'
-    runtimeOnly 'io.ebean:ebean-platform-mysql:15.3.0'
+    runtimeOnly 'io.ebean:ebean-platform-h2:14.3.0'
+    runtimeOnly 'io.ebean:ebean-platform-mysql:14.3.0'
 
     runtimeOnly 'com.h2database:h2:2.2.222'
     runtimeOnly 'mysql:mysql-connector-java:8.0.31'
