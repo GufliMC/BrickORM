@@ -1,19 +1,18 @@
 package com.guflimc.brick.orm.ebean.database;
 
 import com.guflimc.brick.orm.api.database.DatabaseContext;
-import io.ebean.Database;
-import io.ebean.DatabaseFactory;
-import io.ebean.Transaction;
+import io.ebean.*;
+import io.ebean.Query;
 import io.ebean.config.DatabaseConfig;
 import io.ebean.datasource.DataSourceConfig;
 import io.ebean.datasource.DataSourceFactory;
 import io.ebean.datasource.DataSourcePool;
 import io.ebean.migration.MigrationConfig;
 import io.ebean.migration.MigrationRunner;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 
 import javax.sql.DataSource;
+import java.lang.reflect.Field;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Arrays;
@@ -57,7 +56,7 @@ public abstract class EbeanDatabaseContext implements DatabaseContext {
         // initialize database
         DatabaseConfig databaseConfig = new DatabaseConfig();
         databaseConfig.setAllQuotedIdentifiers(true);
-//        databaseConfig.setDisableLazyLoading(true);
+        databaseConfig.setDisableLazyLoading(true);
         databaseConfig.setDataSource(pool);
         databaseConfig.setRegister(true);
         databaseConfig.setDefaultServer(false);
@@ -156,20 +155,52 @@ public abstract class EbeanDatabaseContext implements DatabaseContext {
 
     //
 
+    private <T> Query<T> createQuery(Class<T> entityType) {
+        Query<T> query = database.createQuery(entityType);
+
+        for ( Field field : entityType.getDeclaredFields() ) {
+            OneToMany o2m = field.getAnnotation(OneToMany.class);
+            if ( o2m != null && o2m.fetch() == FetchType.EAGER ) {
+                query = query.fetchCache(field.getName(), "*");
+                continue;
+            }
+
+            ManyToOne m2o = field.getAnnotation(ManyToOne.class);
+            if ( m2o != null && m2o.fetch() == FetchType.EAGER ) {
+                query = query.fetchCache(field.getName(), "*");
+                continue;
+            }
+
+            ManyToMany m2m = field.getAnnotation(ManyToMany.class);
+            if ( m2m != null && m2m.fetch() == FetchType.EAGER ) {
+                query = query.fetchCache(field.getName(), "*");
+                continue;
+            }
+
+            OneToOne o2o = field.getAnnotation(OneToOne.class);
+            if ( o2o != null && o2o.fetch() == FetchType.EAGER ) {
+                query = query.fetchCache(field.getName(), "*");
+                continue;
+            }
+        }
+
+
+        return query;
+    }
 
     @Override
     public <T> CompletableFuture<T> findAsync(Class<T> entityType, Object id) {
-        return async(() -> database.createQuery(entityType).setId(id).findOne());
+        return async(() -> createQuery(entityType).setId(id).findOne());
     }
 
     @Override
     public <T> CompletableFuture<List<T>> findAllAsync(Class<T> entityType) {
-        return async(() -> database.createQuery(entityType).findList());
+        return async(() -> createQuery(entityType).findList());
     }
 
     @Override
     public <T> CompletableFuture<List<T>> findAllWhereAsync(Class<T> entityType, String field, Object value) {
-        return async(() -> database.createQuery(entityType).where().eq(field, value).findList());
+        return async(() -> createQuery(entityType).where().eq(field, value).findList());
     }
 
     //
