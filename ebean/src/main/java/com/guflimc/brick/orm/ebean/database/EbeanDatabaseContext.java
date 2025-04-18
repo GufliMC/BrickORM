@@ -13,11 +13,10 @@ import jakarta.persistence.*;
 
 import javax.sql.DataSource;
 import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
@@ -157,36 +156,56 @@ public abstract class EbeanDatabaseContext implements DatabaseContext {
 
     private <T> Query<T> createQuery(Class<T> entityType) {
         Query<T> query = database.createQuery(entityType);
+        query = eagerLoadRecursive(query, entityType, "", new HashSet<>());
+        return query;
+    }
+
+    private <T> Query<T> eagerLoadRecursive(Query<T> query, Class<?> entityType, String path, Set<Class<?>> visited) {
+        if ( visited.contains(entityType) ) {
+            return query;
+        }
+
+        visited.add(entityType);
+
+        if ( !path.isEmpty() ) {
+            query = query.fetchCache(path);
+            query = query.fetch(path, "*");
+        }
 
         for ( Field field : entityType.getDeclaredFields() ) {
+            if (Modifier.isTransient(field.getModifiers())) {
+                continue;
+            }
+
+            String newPath = path + (path.isEmpty() ? "" : ".") + field.getName();
+
             OneToMany o2m = field.getAnnotation(OneToMany.class);
             if ( o2m != null && o2m.fetch() == FetchType.EAGER ) {
-                query = query.fetchCache(field.getName(), "*");
+                query = eagerLoadRecursive(query, o2m.targetEntity(), newPath, visited);
                 continue;
             }
 
             ManyToOne m2o = field.getAnnotation(ManyToOne.class);
             if ( m2o != null && m2o.fetch() == FetchType.EAGER ) {
-                query = query.fetchCache(field.getName(), "*");
+                query = eagerLoadRecursive(query, m2o.targetEntity() == void.class ? field.getType() : m2o.targetEntity(), newPath, visited);
                 continue;
             }
 
             ManyToMany m2m = field.getAnnotation(ManyToMany.class);
             if ( m2m != null && m2m.fetch() == FetchType.EAGER ) {
-                query = query.fetchCache(field.getName(), "*");
+                query = eagerLoadRecursive(query, m2m.targetEntity(), newPath, visited);
                 continue;
             }
 
             OneToOne o2o = field.getAnnotation(OneToOne.class);
             if ( o2o != null && o2o.fetch() == FetchType.EAGER ) {
-                query = query.fetchCache(field.getName(), "*");
+                query = eagerLoadRecursive(query, o2o.targetEntity() == void.class ? field.getType() : o2o.targetEntity(), newPath, visited);
                 continue;
             }
         }
-
-
         return query;
     }
+
 
     @Override
     public <T> CompletableFuture<T> findAsync(Class<T> entityType, Object id) {
