@@ -4,6 +4,5 @@ include 'api'
 include 'jpa'
 include 'jpa-converters'
 
-include 'hibernate'
 include 'ebean'
 

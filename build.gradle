@@ -3,13 +3,13 @@ plugins {
     id 'pl.allegro.tech.build.axion-release' version '1.13.6'
 }
 
-group 'com.guflimc.brick.orm'
+group 'com.gufli.brick.orm'
 version = scmVersion.version
 
-def javadocProjects = [project(':api'), project(':jpa'), project(':jpa-converters'), project(':ebean'), project(':hibernate')]
+def javadocProjects = [project(':api'), project(':jpa'), project(':jpa-converters'), project(':ebean')]
 ext.set("javadocProjects", javadocProjects)
 
-def publishProjects = [project(':api'), project(':jpa'), project(':jpa-converters'), project(':ebean'), project(':hibernate')]
+def publishProjects = [project(':api'), project(':jpa'), project(':jpa-converters'), project(':ebean')]
 ext.set("publishProjects", publishProjects)
 
 subprojects {

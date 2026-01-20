@@ -1,13 +1,6 @@
 
-repositories {
-    maven { url 'https://repo.spongepowered.org/maven' }
-}
-
 dependencies {
     api project(':api')
 
     compileOnly 'jakarta.persistence:jakarta.persistence-api:3.1.0'
-
-    compileOnly 'net.kyori:adventure-api:4.+'
-    compileOnly 'net.kyori:adventure-text-serializer-gson:+'
 }
