@@ -219,7 +219,24 @@ public abstract class EbeanDatabaseContext implements DatabaseContext {
 
     @Override
     public <T> CompletableFuture<List<T>> findAllWhereAsync(Class<T> entityType, String field, Object value) {
-        return async(() -> createQuery(entityType).where().eq(field, value).findList());
+        return async(() -> {
+            if ( value instanceof String) {
+                return createQuery(entityType).where().ieq(field, (String) value).findList();
+            } else {
+                return createQuery(entityType).where().eq(field, value).findList();
+            }
+        });
+    }
+
+    @Override
+    public <T> CompletableFuture<T> findWhereAsync(Class<T> entityType, String field, Object value) {
+        return async(() -> {
+            if ( value instanceof String) {
+                return createQuery(entityType).where().ieq(field, (String) value).findOne();
+            } else {
+                return createQuery(entityType).where().eq(field, value).findOne();
+            }
+        });
     }
 
     //

@@ -34,6 +34,16 @@ public interface DatabaseContext {
     <T> CompletableFuture<List<T>> findAllWhereAsync(Class<T> entityType, String field, Object value);
 
     /**
+     * Helper method to find an entity of a given entity class async with a single where condition.
+     *
+     * @param entityType entity class
+     * @param field      name of the entity field
+     * @param value      value of the field
+     * @return a future that will be completed with the list of entities
+     */
+    <T> CompletableFuture<T> findWhereAsync(Class<T> entityType, String field, Object value);
+
+    /**
      * Helper method to persist entities async.
      *
      * @param objects entities to persist
